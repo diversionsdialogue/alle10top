@@ -1,0 +1,69 @@
+---
+import Base from "@/layouts/Base.astro";
+import Icon from "@/components/a10/Icon.astro";
+import PostCard from "@/components/a10/PostCard.astro";
+import { categorieenMetAantal, gepubliceerdePosts } from "@/lib/site";
+
+const posts = await gepubliceerdePosts();
+const cats = await categorieenMetAantal();
+const populair = [...cats].sort((a, b) => b.count - a.count);
+const nieuwste = posts.slice(0, 9);
+---
+
+<Base>
+  <main>
+    <section class="kit__wrap hero">
+      <div class="hero__kicker">Slimme lijstjes voor een vliegende start</div>
+      <h1>
+        Geen uitleg.<br />
+        Gewoon een <span class="hero__mark">top&nbsp;10</span>.
+      </h1>
+      <p class="hero__sub">
+        Jij kiest een hobby, wij regelen de rest. Geen ervaring nodig — begin
+        gewoon bij stap één.
+      </p>
+      <div class="hero__chips">
+        <span class="hero__chips-lbl">Populair:</span>
+        {populair.slice(0, 5).map((c) => (
+          <a class="a10-tag" href={`/category/${c.slug}/`}>
+            <Icon name={c.icon} size={15} /> {c.label}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="kit__wrap sec" style="padding-top: 40px;">
+      <div class="sec__head">
+        <h2>Nieuwste lijstjes</h2>
+        <a class="a10-btn a10-btn--ghost a10-btn--sm" href="/lijstjes/">
+          Alle lijstjes →
+        </a>
+      </div>
+      <div class="arc-grid">
+        {nieuwste.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+
+    <section class="kit__wrap sec">
+      <div class="sec__head">
+        <h2>Populaire categorieën</h2>
+        <a class="a10-btn a10-btn--ghost a10-btn--sm" href="/lijstjes/">
+          Alle categorieën →
+        </a>
+      </div>
+      <div class="cat-grid">
+        {populair.slice(0, 8).map((c) => (
+          <a class="cat-tile" href={`/category/${c.slug}/`}>
+            <div class="cat-tile__ic"><Icon name={c.icon} size={24} /></div>
+            <div>
+              <div class="cat-tile__name">{c.label}</div>
+              <div class="cat-tile__count">
+                {c.count} {c.count === 1 ? "lijstje" : "lijstjes"}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>

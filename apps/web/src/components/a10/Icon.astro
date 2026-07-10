@@ -1,0 +1,70 @@
+---
+import {
+  Palette,
+  Camera,
+  Scissors,
+  BookOpen,
+  Utensils,
+  Coffee,
+  Sprout,
+  Footprints,
+  Binoculars,
+  House,
+  Leaf,
+  Armchair,
+  HeartPulse,
+  Gift,
+  Map,
+  Puzzle,
+  Trophy,
+  Tv,
+  Newspaper,
+  Car,
+  List,
+  Search,
+  Sparkles,
+  ArrowRight,
+  ChevronDown,
+  Lightbulb,
+} from "@lucide/astro";
+
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 24 } = Astro.props;
+
+const iconen: Record<string, any> = {
+  palette: Palette,
+  camera: Camera,
+  scissors: Scissors,
+  "book-open": BookOpen,
+  utensils: Utensils,
+  coffee: Coffee,
+  sprout: Sprout,
+  footprints: Footprints,
+  binoculars: Binoculars,
+  home: House,
+  leaf: Leaf,
+  armchair: Armchair,
+  "heart-pulse": HeartPulse,
+  gift: Gift,
+  map: Map,
+  puzzle: Puzzle,
+  trophy: Trophy,
+  tv: Tv,
+  newspaper: Newspaper,
+  car: Car,
+  list: List,
+  search: Search,
+  sparkles: Sparkles,
+  "arrow-right": ArrowRight,
+  "chevron-down": ChevronDown,
+  lightbulb: Lightbulb,
+};
+
+const Comp = iconen[name] ?? List;
+---
+
+<Comp size={size} stroke-width={2} aria-hidden="true" />

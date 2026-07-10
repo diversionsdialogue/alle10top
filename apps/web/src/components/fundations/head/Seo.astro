@@ -1,0 +1,89 @@
+---
+import { AstroSeo } from "@lexingtonthemes/seo";
+import { sanityFetch, siteSettingsQuery, getImageUrl } from "@/lib/sanity";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: {
+    url: string;
+    alt?: string;
+  };
+  type?: "website" | "article";
+  publishedTime?: string;
+  noindex?: boolean;
+}
+
+const {
+  title: pageTitle,
+  description: pageDescription,
+  image: pageImage,
+  type = "website",
+  publishedTime,
+  noindex = false,
+} = Astro.props;
+
+// Fetch site settings for defaults
+const settings = await sanityFetch<{
+  title: string;
+  description: string;
+  siteUrl: string;
+  ogImage?: { asset: any; alt?: string };
+  twitterHandle?: string;
+}>(siteSettingsQuery);
+
+// Use page-specific values or fall back to site defaults
+const title = pageTitle
+  ? `${pageTitle} | ${settings?.title}`
+  : settings?.title || "My Website";
+const description = pageDescription || settings?.description || "";
+const siteUrl = settings?.siteUrl || "https://example.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+
+// Image: use page image, or default OG image from settings
+const ogImageUrl =
+  pageImage?.url ||
+  (settings?.ogImage
+    ? getImageUrl(settings.ogImage.asset, { width: 1200, height: 630 })
+    : "");
+const ogImageAlt = pageImage?.alt || settings?.ogImage?.alt || title;
+
+const twitterHandle = settings?.twitterHandle || "";
+---
+
+<AstroSeo
+  title={title}
+  description={description}
+  canonical={canonical}
+  noindex={noindex}
+  openGraph={{
+    url: canonical,
+    title: title,
+    description: description,
+    images: ogImageUrl
+      ? [
+          {
+            url: ogImageUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImageAlt,
+            type: "image/jpeg",
+          },
+        ]
+      : [],
+    site_name: settings?.title || "My Website",
+    type: type,
+    locale: "en_US",
+    ...(type === "article" &&
+      publishedTime && {
+        article: {
+          publishedTime: publishedTime,
+        },
+      }),
+  }}
+  twitter={{
+    handle: twitterHandle,
+    site: twitterHandle,
+    cardType: ogImageUrl ? "summary_large_image" : "summary",
+  }}
+/>

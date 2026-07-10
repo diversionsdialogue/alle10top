@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const paginas = await getCollection("legalPage");
+  return paginas.map((p) => ({
+    params: { legal: p.id },
+    props: { pagina: p },
+  }));
+}
+
+const { pagina } = Astro.props;
+const { Content } = await render(pagina);
+---
+
+<Base
+  title={pagina.data.page}
+  description={`${pagina.data.page} van Alle10top.nl.`}
+  nieuwsbrief={false}
+>
+  <main>
+    <div class="page-prose">
+      <h1>{pagina.data.page}</h1>
+      <div class="post-body">
+        <Content />
+      </div>
+      <p style="margin: 40px 0 64px; color: var(--ink-500); font-size: 15px;">
+        Laatst bijgewerkt:
+        {pagina.data.pubDate.toLocaleDateString("nl-NL", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}
+      </p>
+    </div>
+  </main>
+</Base>

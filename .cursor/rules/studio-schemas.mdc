@@ -1,0 +1,12 @@
+---
+description: Sanity Studio schemas and seed — coordinate with web queries and transforms
+globs: apps/studio/schemas/**
+---
+
+# Studio schemas and scripts
+
+- **Schema registration:** Add new document types in `apps/studio/schemas/`, export from `schemas/index.ts`, and list them in **`structure.ts`** if editors should see them.
+- **Web contract:** Any new field on `post`, `teamMember`, or `legalPage` must be reflected in **`apps/web/src/lib/sanity/queries.ts`**, **`types.ts`**, and **`transforms.ts`**, and in page/components that consume the transformed shape.
+- **`siteSettings`:** Singleton id **`siteSettings`** in structure — `Seo.astro` queries it via `siteSettingsQuery`; changing field names breaks SEO fallbacks.
+- **`seed.mjs`:** Deletes all docs of types `post`, `teamMember`, `legalPage`, then creates fixed ids — needs write token (see script header). Keep seed documents valid per current schema (required fields, asset rules).
+- **Root migration:** See **`.cursor/rules/root-migration-scripts.mdc`** for `scripts/migrate-to-sanity.ts` (out of sync with current schemas unless extended).

@@ -1,0 +1,14 @@
+---
+description: Lexington Themes pnpm monorepo — web vs studio, filters, minimal scoped changes
+alwaysApply: true
+---
+
+# Lexington monorepo conventions
+
+- **Publisher:** Lexington Themes ([lexingtonthemes.com](https://lexingtonthemes.com/)). Theme/support links in `README.md` apply.
+- **Workspace:** pnpm monorepo. Prefer root scripts: `pnpm dev:web`, `pnpm dev:studio`, `pnpm build:web`, `pnpm build:studio`, `pnpm run seed:all` (see root `package.json`). Day-to-day site work is usually **`apps/web`**.
+- **Apps:** `@lexington/web` = Astro site (`apps/web`). `@lexington/studio` = Sanity Studio (`apps/studio`). Do not assume a single-package root; imports use **`@/`** aliases from `apps/web` as already configured in that app.
+- **Spelling:** The UI kit folder is **`fundations`** — never rename to “foundations”; update all imports if you ever migrate.
+- **Minimal diffs:** Change only what the task requires. Match existing file style (quotes, export style, Astro component structure).
+- **Accuracy:** Only add or document integrations and dependencies that appear in this repo’s `package.json` / `astro.config.mjs` / `sanity.config.ts` — **no `@astrojs/mdx` or `sharp` in `apps/web/package.json`** unless someone adds them.
+- **README drift:** `README.md` mentions `USE_SANITY` / `lib/data.ts` and extra routes; **`data.ts` is not in the repo** — see root `AGENTS.md` for the actual data flow.

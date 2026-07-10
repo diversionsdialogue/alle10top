@@ -1,0 +1,78 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+  title="Contact"
+  description="Vragen aan de redactie van Alle10top.nl, of een idee voor een nieuw lijstje? Neem contact op."
+  nieuwsbrief={false}
+>
+  <main>
+    <div class="page-prose">
+      <p class="kicker">Contact</p>
+      <h1>Laat iets van je horen</h1>
+      <div class="post-body">
+        <p>
+          Een link-suggestie, een idee voor een nieuwe categorie of een vraag
+          aan de redactie? Vul het formulier in, we lezen alles.
+        </p>
+      </div>
+
+      <form class="contact-form" method="post" action="#" data-contact>
+        <div class="a10-field">
+          <label class="a10-field__label" for="naam">Je naam</label>
+          <div class="a10-field__wrap">
+            <input id="naam" name="naam" type="text" autocomplete="name" required />
+          </div>
+        </div>
+        <div class="a10-field">
+          <label class="a10-field__label" for="email">Je e-mailadres</label>
+          <div class="a10-field__wrap">
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="a10-field">
+          <label class="a10-field__label" for="bericht">Je bericht</label>
+          <div class="a10-field__wrap">
+            <textarea id="bericht" name="bericht" rows="6" required></textarea>
+          </div>
+        </div>
+        <button class="a10-btn a10-btn--primary a10-btn--lg" type="submit">
+          Versturen
+        </button>
+      </form>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: 20px;
+    max-width: 520px;
+    margin: 32px 0 64px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: var(--border-width) solid var(--mist-300);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    background: var(--white);
+    color: var(--ink-900);
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--ink-900);
+  }
+  .a10-field__label {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: var(--ink-800);
+  }
+</style>

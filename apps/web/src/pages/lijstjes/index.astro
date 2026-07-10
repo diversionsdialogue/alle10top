@@ -1,0 +1,43 @@
+---
+import Base from "@/layouts/Base.astro";
+import PostCard from "@/components/a10/PostCard.astro";
+import { categorieenMetAantal, gepubliceerdePosts } from "@/lib/site";
+
+const posts = await gepubliceerdePosts();
+const cats = await categorieenMetAantal();
+---
+
+<Base
+  title="Alle lijstjes"
+  description={`Ontdek ${posts.length} lijstjes verdeeld over ${cats.length} categorieën. Kies een categorie of blader door alles.`}
+>
+  <main>
+    <section class="kit__wrap arc-hd">
+      <div class="arc-hd__kicker">Alle hobby's in 10 stappen</div>
+      <h1>Alle lijstjes</h1>
+      <p class="arc-hd__sub">
+        Ontdek {posts.length} lijstjes verdeeld over {cats.length}
+        categorieën. Kies een categorie of blader door alles.
+      </p>
+    </section>
+
+    <section class="kit__wrap">
+      <div class="arc-chips">
+        <a class="a10-tag a10-tag--active" href="/lijstjes/">
+          Alles ({posts.length})
+        </a>
+        {cats.map((c) => (
+          <a class="a10-tag" href={`/category/${c.slug}/`}>
+            {c.label} ({c.count})
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="kit__wrap arc-grid-sec">
+      <div class="arc-grid">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+  </main>
+</Base>

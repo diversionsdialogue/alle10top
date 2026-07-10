@@ -1,0 +1,12 @@
+---
+description: Astro pages — routes, BaseLayout, pull listing/detail data from @/lib/sanity
+globs: apps/web/src/pages/**
+---
+
+# Pages and routing (`apps/web/src/pages/`)
+
+- **Layouts:** Prefer `BaseLayout`, `BlogLayout`, `TeamLayout`, `LegalLayout` from `apps/web/src/layouts/` instead of duplicating `<html>`/chrome.
+- **Dynamic segments:** `[...slug]` is used for **`blog/posts`**, **`team`**, and **`legal`**. **`[tag]`** under `blog/tags/`. Match `getStaticPaths` to the same slug source as detail fetches.
+- **Data source:** Listings and article-style routes load via **`sanityFetch`**, **`queries.ts`** string exports, and **`transformPost` / `transformTeamMember` / `transformLegalPage`** from `@/lib/sanity`. Avoid duplicating GROQ or fetch logic inline in pages.
+- **Empty Sanity:** When `SANITY_PROJECT_ID` / `PUBLIC_SANITY_PROJECT_ID` are unset, `sanityFetch` can return **empty** — pages should stay consistent with that behavior (redirects to `/404` where already implemented).
+- **RSS:** `rss.xml.js` uses the same Sanity post pipeline as blog pages; keep item `link` format in sync with post URLs (`/blog/posts/${slug}/`).

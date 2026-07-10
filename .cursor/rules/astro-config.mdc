@@ -1,0 +1,12 @@
+---
+description: Astro site URL, Tailwind Vite plugin, sitemap, markdown/Shiki — config truth
+globs: apps/web/astro.config.*
+---
+
+# `astro.config.mjs` (apps/web)
+
+- **Integrations:** Only **`@astrojs/sitemap`** is registered. Do not add MDX, React, or other integrations in documentation unless they appear here and in `apps/web/package.json`.
+- **Tailwind:** Applied via **`@tailwindcss/vite`** in `vite.plugins` — not `@astrojs/tailwind`.
+- **`site`:** Canonical build URL for RSS/sitemap — keep in sync with production domain; **`Seo.astro`** may override canonical base from Sanity **`siteSettings.siteUrl`** when available.
+- **Markdown / Shiki:** `markdown.shikiConfig` and top-level `shikiConfig` control code highlighting; `markdown.drafts: true` is set — preserve intent when adjusting.
+- **Experimental:** `experimental.svgo: true` — only remove if you understand asset pipeline impact.

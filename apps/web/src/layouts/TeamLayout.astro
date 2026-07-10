@@ -1,0 +1,54 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Content
+const { frontmatter } = Astro.props;
+
+// SEO data from frontmatter
+const seo = {
+  title: frontmatter.name,
+  description: frontmatter.bio || `${frontmatter.name} - ${frontmatter.role}`,
+  image: frontmatter.image,
+};
+---
+
+<BaseLayout seo={seo}>
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="text-center">
+        <Text tag="p" variant="textXS" class="uppercase text-base-600">
+          {frontmatter.role}
+        </Text>
+        <Text
+          tag="p"
+          variant="displaySM"
+          class="mt-12 text-base-900 font-medium"
+        >
+          {frontmatter.name}
+        </Text>
+        <Text tag="p" variant="textXL" class="text-base-600 mt-2">
+          {frontmatter.bio}
+        </Text>
+        <div class="flex items-center justify-center gap-6 mt-8 text-base-600">
+          {
+            frontmatter.socials?.map((social) => (
+              <a href={social.href}>{social.label}</a>
+            ))
+          }
+        </div>
+        <img
+          alt={frontmatter.image.alt}
+          src={frontmatter.image.url}
+          width="1400"
+          height="1400"
+          loading="lazy"
+          decoding="async"
+          class="object-cover object-center mt-12"
+        />
+      </div>
+      <Wrapper variant="prose"><slot /></Wrapper>
+    </Wrapper>
+  </section>
+</BaseLayout>

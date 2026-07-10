@@ -1,0 +1,56 @@
+---
+import Base from "@/layouts/Base.astro";
+import PostCard from "@/components/a10/PostCard.astro";
+import {
+  categorie,
+  categorieenMetAantal,
+  gepubliceerdePosts,
+} from "@/lib/site";
+
+export async function getStaticPaths() {
+  const cats = await categorieenMetAantal();
+  return cats.map((c) => ({ params: { cat: c.slug } }));
+}
+
+const { cat } = Astro.params;
+const c = categorie(cat!);
+const alle = await gepubliceerdePosts();
+const posts = alle.filter((p) => p.data.category === cat);
+const cats = await categorieenMetAantal();
+---
+
+<Base
+  title={c.label}
+  description={`Alle top 10-lijstjes over ${c.label.toLowerCase()}: ${posts.length} ${posts.length === 1 ? "lijstje" : "lijstjes"} om snel mee te starten.`}
+>
+  <main>
+    <section class="kit__wrap arc-hd">
+      <div class="arc-hd__kicker">Categorie</div>
+      <h1>{c.label}</h1>
+      <p class="arc-hd__sub">
+        {posts.length} {posts.length === 1 ? "lijstje" : "lijstjes"} in deze
+        categorie.
+      </p>
+    </section>
+
+    <section class="kit__wrap">
+      <div class="arc-chips">
+        <a class="a10-tag" href="/lijstjes/">Alles</a>
+        {cats.map((k) => (
+          <a
+            class:list={["a10-tag", { "a10-tag--active": k.slug === cat }]}
+            href={`/category/${k.slug}/`}
+          >
+            {k.label} ({k.count})
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="kit__wrap arc-grid-sec">
+      <div class="arc-grid">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+  </main>
+</Base>

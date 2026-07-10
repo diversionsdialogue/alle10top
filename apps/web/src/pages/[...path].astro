@@ -1,0 +1,106 @@
+---
+import { render } from "astro:content";
+import readingTime from "reading-time";
+import Base from "@/layouts/Base.astro";
+import CatImage from "@/components/a10/CatImage.astro";
+import Icon from "@/components/a10/Icon.astro";
+import PostCard from "@/components/a10/PostCard.astro";
+import {
+  categorie,
+  formatteerDatum,
+  gepubliceerdePosts,
+} from "@/lib/site";
+
+export async function getStaticPaths() {
+  const posts = await gepubliceerdePosts();
+  return posts.map((post) => ({
+    params: { path: post.data.legacyPath.replace(/^\/|\/$/g, "") },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const c = categorie(post.data.category);
+// Markdown-modus rendert de collection entry; Sanity-modus levert kant-en-klare HTML.
+const Content = post.entry ? (await render(post.entry)).Content : null;
+const leestijd = Math.max(1, Math.round(readingTime(post.bodyText).minutes));
+
+const alle = await gepubliceerdePosts();
+const verwant = alle
+  .filter(
+    (p) => p.id !== post.id && p.data.category === post.data.category
+  )
+  .slice(0, 3);
+const meer = verwant.length
+  ? verwant
+  : alle.filter((p) => p.id !== post.id).slice(0, 3);
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  inLanguage: "nl-NL",
+  mainEntityOfPage: new URL(post.data.legacyPath, "https://www.alle10top.nl")
+    .href,
+  ...(post.data.image?.url
+    ? { image: new URL(post.data.image.url, "https://www.alle10top.nl").href }
+    : {}),
+  publisher: {
+    "@type": "Organization",
+    name: "Alle10top",
+    url: "https://www.alle10top.nl",
+  },
+});
+---
+
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image?.url}
+  type="article"
+  pubDate={post.data.pubDate}
+>
+  <script type="application/ld+json" set:html={jsonLd} is:inline />
+  <main>
+    <header class="blog-hd">
+      <div class="blog-hd__tags">
+        <a class="a10-tag" href={`/category/${c.slug}/`}>
+          <Icon name={c.icon} size={15} /> {c.label}
+        </a>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="blog-hd__sub">{post.data.description}</p>
+      <div class="blog-hd__meta">
+        <span>{formatteerDatum(post.data.pubDate)}</span>
+        <span class="blog-hd__meta-sep">·</span>
+        <span>{leestijd} min leestijd</span>
+      </div>
+    </header>
+
+    <div class="blog-hero">
+      <div class="blog-hero__img">
+        <CatImage cat={post.data.category} image={post.data.image} />
+      </div>
+    </div>
+
+    <div class="blog-prose">
+      <article class="post-body">
+        {Content ? <Content /> : <Fragment set:html={post.bodyHtml ?? ""} />}
+      </article>
+    </div>
+
+    <section class="kit__wrap blog-more">
+      <div class="blog-more__head">
+        <h2>Meer lijstjes</h2>
+        <a class="a10-btn a10-btn--ghost a10-btn--sm" href="/lijstjes/">
+          Alle lijstjes →
+        </a>
+      </div>
+      <div class="more-grid">
+        {meer.map((p) => <PostCard post={p} />)}
+      </div>
+    </section>
+  </main>
+</Base>

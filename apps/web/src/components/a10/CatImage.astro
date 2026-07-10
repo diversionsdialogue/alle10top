@@ -1,0 +1,33 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import Icon from "./Icon.astro";
+import { categorie } from "@/lib/site";
+
+interface Props {
+  cat: string;
+  image?: { url: string; alt?: string };
+  badge?: string;
+}
+
+const { cat, image, badge } = Astro.props;
+const c = categorie(cat);
+
+// Toon alleen een echte afbeelding als die ook bestaat: externe URL's
+// altijd, lokale pas zodra het bestand in public/ is geplaatst
+// (de uploads-map komt via het afbeeldingen-manifest).
+const publicDir = fileURLToPath(new URL("../../../public", import.meta.url));
+const beschikbaar =
+  image &&
+  (/^https?:\/\//.test(image.url) ||
+    fs.existsSync(path.join(publicDir, image.url.replace(/^\//, ""))));
+---
+
+<div
+  class="cat-img"
+  style={`height:100%; background:${c.tint[0]}; color:${c.tint[1]};`}
+>
+  {beschikbaar ? <img src={image!.url} alt={image!.alt ?? ""} loading="lazy" /> : <Icon name={c.icon} size={64} />}
+  {badge && <span class="cat-img__badge a10-badge a10-badge--coral">{badge}</span>}
+</div>

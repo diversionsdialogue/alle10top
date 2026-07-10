@@ -1,0 +1,38 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# Editor/IDE settings
+.idea/
+*.iml
+
+# Sanity
+.sanity/
+
+# Temporary/system files
+*.swp
+*.tmp
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Gegenereerde migratie-export (herdraaibaar via scripts/migrate-alle10top.ts --dry-run)
+scripts/sanity-export.ndjson

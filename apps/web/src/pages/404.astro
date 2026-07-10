@@ -1,0 +1,27 @@
+---
+import Base from "@/layouts/Base.astro";
+import PostCard from "@/components/a10/PostCard.astro";
+import { gepubliceerdePosts } from "@/lib/site";
+
+const posts = (await gepubliceerdePosts()).slice(0, 3);
+---
+
+<Base title="Pagina niet gevonden" nieuwsbrief={false}>
+  <main>
+    <section class="kit__wrap arc-hd" style="border-bottom: none;">
+      <div class="arc-hd__kicker">Foutcode 404</div>
+      <h1>Deze pagina bestaat niet (meer)</h1>
+      <p class="arc-hd__sub">
+        Het lijstje dat je zoekt is verhuisd of bestaat niet meer. Begin
+        opnieuw op de <a href="/">homepage</a> of bekijk
+        <a href="/lijstjes/">alle lijstjes</a>.
+      </p>
+    </section>
+    <section class="kit__wrap sec" style="padding-top: 8px;">
+      <div class="sec__head"><h2>Misschien zocht je dit</h2></div>
+      <div class="arc-grid">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+  </main>
+</Base>

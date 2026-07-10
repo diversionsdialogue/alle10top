@@ -1,0 +1,31 @@
+---
+import CatImage from "./CatImage.astro";
+import { categorie, formatteerDatum, postUrl, type Post } from "@/lib/site";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const c = categorie(post.data.category);
+const vers =
+  Date.now() - post.data.pubDate.valueOf() < 1000 * 60 * 60 * 24 * 90;
+---
+
+<a class="arc-card" href={postUrl(post)}>
+  <div class="arc-card__img">
+    <CatImage
+      cat={post.data.category}
+      image={post.data.image}
+      badge={vers ? "Nieuw" : undefined}
+    />
+  </div>
+  <div class="arc-card__body">
+    <div class="arc-card__meta">
+      <span>{formatteerDatum(post.data.pubDate)}</span>
+      <span>·</span>
+      <span>{c.label}</span>
+    </div>
+    <h3 class="arc-card__title">{post.data.title}</h3>
+  </div>
+</a>

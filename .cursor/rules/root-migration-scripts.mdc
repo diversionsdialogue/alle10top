@@ -1,0 +1,10 @@
+---
+description: Root TypeScript migration script — legacy vs current Studio schemas
+globs: scripts/**
+---
+
+# `scripts/` (repo root)
+
+- **`migrate-to-sanity.ts`** expects markdown folders and Sanity types **beyond** what `apps/studio/schemas/` defines today; align schemas and paths before relying on it.
+- Env: **`SANITY_PROJECT_ID`** (from `apps/web/.env` per script), **`SSANITY_WRITE_TOKEN`** as read by the script — verify token variable name against source when debugging.
+- Prefer Studio **`seed.mjs`** + manual edits for this repo’s actual document types unless migration is updated.

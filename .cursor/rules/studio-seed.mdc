@@ -1,0 +1,8 @@
+---
+description: Sanity seed script — destructive reset + fixture documents
+globs: apps/studio/scripts/**
+---
+
+# `apps/studio/scripts/`
+
+- **`seed.mjs`:** Batch-deletes all `post`, `teamMember`, `legalPage`, then recreates canonical fixture ids. Requires write-capable token and project env (see file header). After changing schemas, update fixture payloads so Studio validation still passes.

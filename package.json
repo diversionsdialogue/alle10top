@@ -1,0 +1,21 @@
+{
+  "name": "lexington-sanity-starter",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:web": "pnpm --filter @lexington/web dev",
+    "dev:studio": "pnpm --filter @lexington/studio dev",
+    "build": "pnpm --parallel -r build",
+    "build:web": "pnpm --filter @lexington/web build",
+    "build:studio": "pnpm --filter @lexington/studio build",
+    "clean": "bash scripts/clean.sh",
+    "seed:all": "pnpm --filter @lexington/studio run seed"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "devDependencies": {
+    "@sanity/client": "^7.22.0",
+    "dotenv": "^17.4.2",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.23.0"
+  }
+}

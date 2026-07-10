@@ -1,0 +1,43 @@
+---
+import { categorieenMetAantal } from "@/lib/site";
+
+const cats = await categorieenMetAantal();
+const jaar = new Date().getFullYear();
+---
+
+<footer class="ft">
+  <div class="kit__wrap ft__inner">
+    <div class="ft__brand">
+      <a href="/" aria-label="Naar homepage">
+        <img src="/alle10top-white-logo.png" alt="Alle10top" width="150" height="30" />
+      </a>
+      <p>
+        Slimme lijstjes om een snelle start te maken met je hobby. Nooit te
+        laat om te beginnen.
+      </p>
+    </div>
+    <div class="ft__col">
+      <h5>Categorieën</h5>
+      {cats.slice(0, 4).map((c) => (
+        <a href={`/category/${c.slug}/`}>{c.label}</a>
+      ))}
+      <a href="/lijstjes/">Alle categorieën →</a>
+    </div>
+    <div class="ft__col">
+      <h5>Alle10top</h5>
+      <a href="/over-ons/">Over ons</a>
+      <a href="/lijstjes/">Alle lijstjes</a>
+      <a href="/contact/">Contact</a>
+      <a href="/rss.xml">RSS</a>
+    </div>
+    <div class="ft__col">
+      <h5>Praktisch</h5>
+      <a href="/privacy-statement/">Privacy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+      <a href="/sitemap-index.xml">Sitemap</a>
+    </div>
+  </div>
+  <div class="kit__wrap ft__bottom">
+    <span>© {jaar} Alle10top.nl — gemaakt met aandacht in Nederland</span>
+  </div>
+</footer>

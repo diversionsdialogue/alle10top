@@ -1,0 +1,234 @@
+/* ============================================================
+   Alle10top — Color tokens
+   Brand: ink #111111 · coral #FF5B3E · sun #FFD84D · mist #DEDEDE
+   Warm, friendly, high-contrast palette tuned for 50+ readers.
+   ============================================================ */
+
+:root {
+  /* ---- Brand primitives ---- */
+  --ink:        #111111;   /* near-black, primary text + logo */
+  --coral:      #FF5B3E;   /* primary action / brand accent */
+  --sun:        #FFD84D;   /* highlight / secondary accent */
+  --mist:       #DEDEDE;   /* neutral border / divider */
+
+  /* ---- Ink scale (warm-neutral greys) ---- */
+  --ink-900: #111111;
+  --ink-800: #2a2826;
+  --ink-700: #44413d;
+  --ink-600: #5f5b55;
+  --ink-500: #7c776f;  /* secondary text on paper */
+  --ink-400: #9b958c;
+  --ink-300: #c2bdb4;
+
+  /* ---- Coral scale ---- */
+  --coral-700: #c43618;  /* pressed */
+  --coral-600: #e8472a;  /* hover */
+  --coral-500: #ff5b3e;  /* base */
+  --coral-300: #ffae9d;
+  --coral-100: #ffe6e0;  /* tint surface */
+  --coral-050: #fff3ef;
+
+  /* ---- Sun scale ---- */
+  --sun-600: #e0b426;  /* darker / text-on-paper safe */
+  --sun-500: #ffcf2e;
+  --sun-400: #ffd84d;  /* base */
+  --sun-200: #ffeea8;
+  --sun-100: #fff7d6;  /* tint surface */
+
+  /* ---- Neutrals / paper ---- */
+  --white:    #ffffff;
+  --paper:    #faf6ef;  /* warm off-white — primary app background */
+  --paper-2:  #f4eee4;  /* sunk panel / alt row */
+  --mist-300: #dedede;  /* base border */
+  --mist-200: #e9e7e2;  /* hairline on paper */
+  --mist-100: #f1efea;
+
+  /* ---- Semantic feedback ---- */
+  --success:  #2e8b57;
+  --success-bg: #e4f3ea;
+  --danger:   #c43618;
+  --danger-bg: #ffe6e0;
+  --info:     #2563a8;
+  --info-bg:  #e3eefa;
+
+  /* ---- Semantic aliases ---- */
+  --bg-page:        var(--paper);
+  --bg-sunk:        var(--paper-2);
+  --surface-card:   var(--white);
+  --surface-raised: var(--white);
+  --surface-tint:   var(--coral-050);
+
+  --text-strong:    var(--ink-900);
+  --text-body:      var(--ink-800);
+  --text-muted:     var(--ink-500);
+  --text-on-coral:  #ffffff;
+  --text-on-sun:    var(--ink-900);
+
+  --border-default: var(--mist-300);
+  --border-hairline:var(--mist-200);
+  --border-strong:  var(--ink-900);
+
+  --accent:         var(--coral-500);
+  --accent-hover:   var(--coral-600);
+  --accent-press:   var(--coral-700);
+  --highlight:      var(--sun-400);
+
+  --focus-ring:     var(--ink-900);
+  --focus-ring-offset: var(--paper);
+}
+/* ============================================================
+   Alle10top — Typography tokens
+   DM Sans for everything; Nova Mono for ranks, labels, kickers.
+   Scale is generous — base body is 18px for 50+ legibility.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Nova Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: "DM Sans", system-ui, sans-serif;
+
+  /* ---- Weights ---- */
+  --fw-light: 300; /* @kind font */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold: 700; /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+  --fw-black: 900; /* @kind font */
+
+  /* ---- Type scale (px) — min body 18 ---- */
+  --fs-display: 4.25rem;   /* 68 — hero */
+  --fs-h1: 3rem;           /* 48 */
+  --fs-h2: 2.25rem;        /* 36 */
+  --fs-h3: 1.625rem;       /* 26 */
+  --fs-h4: 1.25rem;        /* 20 */
+  --fs-lead: 1.375rem;     /* 22 — intro paragraphs */
+  --fs-body: 1.125rem;     /* 18 — base body */
+  --fs-small: 1rem;        /* 16 */
+  --fs-label: 0.8125rem;   /* 13 — mono kickers/labels */
+
+  /* ---- Line heights ---- */
+  --lh-tight: 1.04; /* @kind other */
+  --lh-snug: 1.18; /* @kind other */
+  --lh-normal: 1.5; /* @kind other */
+  --lh-relaxed: 1.65; /* @kind other */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight: -0.02em; /* @kind other */
+  --ls-snug: -0.01em; /* @kind other */
+  --ls-normal: 0; /* @kind other */
+  --ls-label: 0.14em; /* @kind other */
+}
+/* ============================================================
+   Alle10top — Spacing, radius, shadow, layout tokens
+   4px base grid · soft generous rounding · low warm shadows
+   ============================================================ */
+
+:root {
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+
+  /* ---- Radius — friendly, soft ---- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Borders ---- */
+  --border-width: 1.5px; /* @kind spacing */
+  --border-width-bold: 2.5px; /* @kind spacing */
+
+  /* ---- Shadows — soft, warm, low ---- */
+  --shadow-sm: 0 1px 2px rgba(17,17,17,0.06), 0 1px 1px rgba(17,17,17,0.04);
+  --shadow-md: 0 4px 14px rgba(17,17,17,0.08), 0 2px 4px rgba(17,17,17,0.05);
+  --shadow-lg: 0 14px 40px rgba(17,17,17,0.12), 0 4px 10px rgba(17,17,17,0.06);
+  /* solid "sticker" shadow — playful editorial offset */
+  --shadow-pop: 4px 4px 0 var(--ink-900);
+  --shadow-pop-coral: 4px 4px 0 var(--coral-500);
+
+  /* ---- Focus ---- */
+  --focus-width: 3px; /* @kind spacing */
+  --focus-offset: 2px; /* @kind spacing */
+
+  /* ---- Layout ---- */
+  --container: 1200px; /* @kind spacing */
+  --container-narrow: 760px; /* @kind spacing */
+  --header-h: 76px; /* @kind spacing */
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur: 200ms; /* @kind other */
+  --dur-slow: 360ms; /* @kind other */
+
+  /* ---- Min touch target (accessibility) ---- */
+  --hit: 48px; /* @kind spacing */
+}
+/* ============================================================
+   Alle10top — Base element defaults (built on tokens)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  font-weight: var(--fw-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-extrabold);
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); letter-spacing: var(--ls-snug); }
+h4 { font-size: var(--fs-h4); font-weight: var(--fw-bold); letter-spacing: var(--ls-snug); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a { color: var(--accent-hover); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:hover { color: var(--accent-press); }
+
+/* Mono kicker / eyebrow / rank label */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: var(--fw-regular);
+}
+
+/* Accessible focus — heavy ink ring, works on every surface */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm);
+}
+
+::selection { background: var(--sun-400); color: var(--ink-900); }

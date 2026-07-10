@@ -1,0 +1,12 @@
+---
+description: Markdown entries under src/content — match Zod in content.config.ts
+globs: apps/web/src/content/**
+---
+
+# Markdown content (`src/content/`)
+
+- **Collections:** Defined in **`content.config.ts`** — **`posts`**, **`teamMember`**, **`legalPage`** only (no authors/podcast/jobs/helpCenter in this tree).
+- **Schemas:** All fields are plain Zod types. **`image`** is `{ url: string; alt?: string }` (string URL), **not** `image()` from Astro assets — keep URLs consistent with what Search and any static assets expect.
+- **Frontmatter:** Must satisfy the Zod object for each collection — required fields are strict (`posts`: title, description, pubDate; `legalPage`: page, pubDate; etc.).
+- **Consumer today:** `getCollection("posts")` is used in **`apps/web/src/components/global/Search.astro`**. Blog listing/post pages use **Sanity**, not collections — changing markdown alone does not update those pages.
+- **Do not** widen schemas without updating every consumer (Search payload shape, any future `getCollection` callers) and sample markdown under `src/content/`.

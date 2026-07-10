@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<div class="nl-wrap">
+  <div class="nl-watermark" aria-hidden="true">10</div>
+  <div class="nl-inner">
+    <div class="nl-icon"><Icon name="sparkles" size={22} /></div>
+    <h2>Blijf op de hoogte van nieuwe lijstjes</h2>
+    <p>Elke week een nieuw lijstje in je inbox. Nooit meer een leuke hobby missen.</p>
+    <form class="nl-form" method="post" action="#" data-nieuwsbrief>
+      <input
+        class="nl-input"
+        type="email"
+        name="email"
+        placeholder="jouw@email.nl"
+        aria-label="E-mailadres"
+        required
+      />
+      <button class="a10-btn a10-btn--primary" type="submit">Aanmelden</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+---
+import Base from "@/layouts/Base.astro";
+import { categorieenMetAantal } from "@/lib/site";
+
+const cats = await categorieenMetAantal();
+const totaal = cats.reduce((n, c) => n + c.count, 0);
+---
+
+<Base
+  title="Over ons"
+  description="Alle10top.nl maakt slimme top 10-lijstjes waarmee je snel start met een nieuwe hobby. Geen uitleg, gewoon een top 10."
+>
+  <main>
+    <div class="page-prose">
+      <p class="kicker">Over Alle10top</p>
+      <h1>Nooit te laat om te beginnen</h1>
+      <div class="post-body">
+        <p>
+          Alle10top.nl maakt slimme lijstjes waarmee je een vliegende start
+          maakt met een nieuwe hobby. Elk lijstje is een top 10: de tien
+          dingen die je moet weten, kopen of doen om te beginnen. Geen lange
+          uitleg, geen jargon, gewoon tien duidelijke stappen.
+        </p>
+        <p>
+          De redactie zoekt uit, vergelijkt en zet op een rij. Op dit moment
+          vind je hier {totaal} lijstjes verdeeld over {cats.length}
+          categorieën, van aquarelleren tot tuinieren. Bij sommige lijstjes
+          staan producten met een link naar bol.com; als je daar iets koopt,
+          kan Alle10top daar een kleine vergoeding voor krijgen. Dat verandert
+          niets aan onze keuzes.
+        </p>
+        <p>
+          Alles wat we schrijven is een momentopname. We doen ons best om
+          informatie actueel te houden, maar lees ook onze
+          <a href="/disclaimer/">disclaimer</a>.
+        </p>
+        <h2>Vragen of ideeën?</h2>
+        <p>
+          Een suggestie voor een nieuw lijstje of een vraag aan de redactie?
+          Je bent meer dan welkom via de <a href="/contact/">contactpagina</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+</Base>

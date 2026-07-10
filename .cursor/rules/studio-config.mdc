@@ -1,0 +1,10 @@
+---
+description: Sanity Studio config, desk structure, and seed script entrypoints
+globs: apps/studio/*.ts
+---
+
+# Studio app config (`apps/studio/*.ts`)
+
+- **`sanity.config.ts`:** Plugins **`structureTool`** + **`visionTool`** only; project id/dataset from `SANITY_STUDIO_*` env.
+- **`structure.ts`:** Document lists and **`siteSettings`** singleton id — keep ids stable (`siteSettings`) for GROQ in the web app.
+- Changing titles/icons here does not change the web — but reordering or hiding schema types affects editors.

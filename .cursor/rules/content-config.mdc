@@ -1,0 +1,10 @@
+---
+description: Single source for collection definitions — coordinate with src/content and Search.astro
+globs: apps/web/src/content.config.ts
+---
+
+# `content.config.ts`
+
+- Collections **`posts`**, **`teamMember`**, **`legalPage`** only; folder `base` paths must stay aligned with `apps/web/src/content/*`.
+- Changing collection names breaks `getCollection("posts")` in **`Search.astro`** — update that import and any loaders.
+- Image shape is **`{ url: string; alt?: string }`** only; do not switch to Astro `image()` without migrating consumers and markdown frontmatter.

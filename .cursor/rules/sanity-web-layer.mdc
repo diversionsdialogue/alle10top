@@ -1,0 +1,15 @@
+---
+description: Sanity client, GROQ, transforms, Portable Text, images — single source in lib/sanity
+globs: apps/web/src/lib/sanity/**
+---
+
+# Sanity web layer (`apps/web/src/lib/sanity/`)
+
+- **Barrel:** Import from `@/lib/sanity` (`index.ts`) in pages/components unless there is a strong reason to deep-import.
+- **Client:** `client.ts` / `previewClient` — env: `SANITY_PROJECT_ID` or `PUBLIC_SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_API_VERSION`, optional `SANITY_READ_TOKEN`.
+- **Fetch:** `fetch.ts` — short-circuits to empty data when project id env is missing (build/CI safety). Preserve that contract when refactoring.
+- **Queries:** All GROQ lives in **`queries.ts`**. Reuse fragments (`postFields`, etc.). Run `groq` tagged templates consistently.
+- **Transforms:** **`transforms.ts`** map Sanity documents to UI shapes documented in **`types.ts`**. If you add fields in Studio, update query projection → types → transform → consuming components.
+- **Portable Text:** Use **`portableText.ts`** for HTML and plain-text extraction; avoid ad hoc JSON traversal in pages.
+- **Images:** Use **`getImageUrl` / `urlFor`** from `image.ts` with `@sanity/image-url`; do not hand-build CDN URLs.
+- **`lib/data.ts`:** Not present in this repo; if added for a unified CMS/markdown toggle, keep it aligned with existing `sanityFetch` + `getCollection` patterns described in `AGENTS.md`.

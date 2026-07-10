@@ -1,0 +1,26 @@
+{
+  "name": "@lexington/studio",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "start": "sanity start",
+    "seed": "node scripts/seed.mjs"
+  },
+  "dependencies": {
+    "@sanity/icons": "^3.7.4",
+    "@sanity/vision": "^5.25.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "sanity": "^5.25.1",
+    "styled-components": "^6.4.1"
+  },
+  "devDependencies": {
+    "@sanity/client": "^7.22.0",
+    "@types/react": "^19.2.14",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,78 @@
+---
+import Icon from "./Icon.astro";
+import { categorieenMetAantal, MEGA_GROEPEN } from "@/lib/site";
+
+const cats = await categorieenMetAantal();
+const totaal = cats.reduce((n, c) => n + c.count, 0);
+const pad = Astro.url.pathname;
+---
+
+<header class="hd">
+  <div class="kit__wrap hd__bar">
+    <a class="hd__logo" href="/" aria-label="Naar homepage">
+      <img src="/alle10top-logo.png" alt="Alle10top" width="170" height="34" />
+    </a>
+
+    <nav class="hd__nav" aria-label="Hoofdnavigatie">
+      <a class:list={["hd__nav-link", { "is-active": pad === "/" }]} href="/">Home</a>
+
+      <div class="hd__mega-holder">
+        <a
+          class:list={["hd__nav-link", { "is-active": pad.startsWith("/category/") }]}
+          href="/lijstjes/"
+        >
+          Categorieën <Icon name="chevron-down" size={15} />
+        </a>
+        <div class="mega">
+          <div class="mega__body">
+            {MEGA_GROEPEN.map((groep) => (
+              <div class="mega__col">
+                <div class="mega__col-head">{groep}</div>
+                {cats
+                  .filter((c) => c.groep === groep)
+                  .map((c) => (
+                    <a class="mega__item" href={`/category/${c.slug}/`}>
+                      <span class="mega__item-ic">
+                        <Icon name={c.icon} size={18} />
+                      </span>
+                      <span>
+                        <div class="mega__item-name">{c.label}</div>
+                        <div class="mega__item-count">
+                          {c.count} {c.count === 1 ? "lijstje" : "lijstjes"}
+                        </div>
+                      </span>
+                    </a>
+                  ))}
+              </div>
+            ))}
+          </div>
+          <div class="mega__footer">
+            <a class="mega__footer-link" href="/lijstjes/">
+              Bekijk alle categorieën <Icon name="arrow-right" size={15} />
+            </a>
+            <span class="mega__footer-count">
+              {cats.length} categorieën · {totaal} lijstjes
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <a
+        class:list={["hd__nav-link", { "is-active": pad.startsWith("/lijstjes") }]}
+        href="/lijstjes/"
+      >
+        Nieuw
+      </a>
+      <a
+        class:list={["hd__nav-link", { "is-active": pad.startsWith("/over-ons") }]}
+        href="/over-ons/"
+      >
+        Over ons
+      </a>
+    </nav>
+
+    <div class="hd__right">
+      <a class="hd__nav-link" href="/contact/">Contact</a>
+    </div>
+  </div>
+</header>
