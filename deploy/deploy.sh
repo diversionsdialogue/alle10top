@@ -18,7 +18,10 @@ export SANITY_DATASET=production
 
 git pull origin main
 
-corepack enable
+# pnpm via corepack in de home-dir (de ploi-gebruiker mag niet in /usr/bin)
+mkdir -p "$HOME/.local/bin"
+corepack enable --install-directory "$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 corepack prepare pnpm@9.15.0 --activate
 
 pnpm install --frozen-lockfile
